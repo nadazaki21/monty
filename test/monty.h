@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <string.h>
+#include <ctype.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -39,8 +40,46 @@ typedef struct instruction_s
 } instruction_t;
 
 
+/**
+ * struct stack_pointers - has all the program's stack pointer data.
+ * for reference throughout the program.
+ * @top: pointer to the top element of the stack.
+ * @front: pointer to the front element of a queue.
+ * @rear: pointer to the rear element of a queue.
+ * @fstream: pointer to open FILE stream.
+ * @buffer: pointer to the current read line string.
+ * @argtokens: pointer to the argtokens string array.
+ *
+ * Description: all pointers needed to handle the stacks, queues,
+ * LIFO, and FIFO operations.
+ */
+typedef struct stack_pointers
+{
+	stack_t *top;
+	stack_t *front;
+	stack_t *rear;
+	FILE *fstream;
+	char *buffer;
+	char **argtokens;
+} stack_pointers;
+
+/** global variable **/
+extern stack_pointers main_stack;
+
 /** function declarations **/
 FILE *start_stream(char *filename);
 void init_argtokens(char **argtokens);
+void execute_op(int linenumber);
+void tokenize_line(char *buffer, char **argtokens);
+void init_main_stack(FILE *fstream);
+void (*get_op_fun(char **))(stack_t **, unsigned int line_number);
+int string_digit(char *string);
+void freedlist(stack_t *head);
+
+/** monty OP functions **/
+
+void monty_push(stack_t **stack, unsigned int line_number);
+void monty_pall(stack_t **stack, unsigned int line_number);
+void monty_pint(stack_t **stack, unsigned int line_number);
 
 #endif

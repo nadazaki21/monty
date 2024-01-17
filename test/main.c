@@ -1,5 +1,7 @@
 #include "monty.h"
 
+stack_pointers main_stack;
+
 /**
  * main - entry point for the monty program.
  * @argc: number of arguments.
@@ -10,31 +12,28 @@
 int main(int argc, char **argv)
 {
 	FILE *fstream;
-	char *buffer = NULL, *token, *argtokens[3], *string;
+	char *buffer = NULL, *argtokens[2];
 	size_t size;
-	int i, linenumber = 0;
+	int linenumber = 0;
 
 	if (argc != 2)
 	{
-		printf("USAGE: monty file\n");
+		dprintf(2, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 	fstream = start_stream(argv[1]);
+	init_main_stack(fstream);
 	while (getline(&buffer, &size, fstream) != -1)
 	{
+		main_stack.buffer = buffer;
 		init_argtokens(argtokens);
 		linenumber++;
-		for (i = 0, string = buffer; i < 2; string = NULL, i++)
-		{
-			token = strtok(string, " \n");
-			if (token == NULL)
-				break;
-			argtokens[i] = token;
-		}
-		argtokens[i] = NULL;
-		execute_op(argtokens, linenumber);
+		tokenize_line(buffer, argtokens);
+		if (argtokens[0])
+			execute_op(linenumber);
 	}
-	fclose(fstream);
 	free(buffer);
+	fclose(fstream);
+	freedlist(main_stack.top);
 	return (0);
 }
