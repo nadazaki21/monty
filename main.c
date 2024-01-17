@@ -1,34 +1,39 @@
 #include "monty.h"
-args_t *args = NULL;
-/**
- * main - program main entry
- * @argc: number of args
- * @argv: the args themselves
- * Return: 0 0on succes and otherwise on failure
-*/
 
+stack_pointers main_stack;
+
+/**
+ * main - entry point for the monty program.
+ * @argc: number of arguments.
+ * @argv: array of argument strings.
+ *
+ * Return: 0 if successful, otherwise if error encountered.
+ */
 int main(int argc, char **argv)
 {
-    (void) argv;
-    size_t n = 0;
+	FILE *fstream;
+	char *buffer = NULL, *argtokens[2];
+	size_t size;
+	int linenumber = 0;
 
-    if (argc != 2) /* validate the number of arguments*/
-    {
-        printf("USAGE: monty file");
-        exit(EXIT_FAILURE);
-    }
-    initialize_args();
-    open_stream(argv[2]);
-
-    /*start to read from the file */
-    while (getline(&(args->line) ,&n, args->stream))
-    {
-        args->line_number++;
-        tokenize(args->line);
-    }
-    
-    close_stream();
-    freeall();
-
-    return (0);
+	if (argc != 2)
+	{
+		dprintf(2, "USAGE: monty file\n");
+		exit(EXIT_FAILURE);
+	}
+	fstream = start_stream(argv[1]);
+	init_main_stack(fstream);
+	while (getline(&buffer, &size, fstream) != -1)
+	{
+		main_stack.buffer = buffer;
+		init_argtokens(argtokens);
+		linenumber++;
+		tokenize_line(buffer, argtokens);
+		if (argtokens[0])
+			execute_op(linenumber);
+	}
+	free(buffer);
+	fclose(fstream);
+	freedlist(main_stack.top);
+	return (0);
 }

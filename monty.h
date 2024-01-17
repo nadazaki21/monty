@@ -1,10 +1,13 @@
-#ifndef MY_HEADER
-#define MY_HEADER
+#ifndef MONTY_H
+#define MONTY_H
 
-
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include <string.h>
+#include <ctype.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -17,11 +20,10 @@
  */
 typedef struct stack_s
 {
-        int n; /* integer argument associated with an op code */
-        struct stack_s *prev;
-        struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
-
 
 /**
  * struct instruction_s - opcode and its function
@@ -31,51 +33,53 @@ typedef struct stack_s
  * Description: opcode and its function
  * for stack, queues, LIFO, FIFO
  */
-typedef struct instruction_s /* opcode node */
+typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+
 /**
- * arguments - this struct holds the set of arguments that
- * should be globally reconized all overs the files as 
- * they would be needed for all the files as arguments
- * 
-*/
-
-typedef struct arguments
+ * struct stack_pointers - has all the program's stack pointer data.
+ * for reference throughout the program.
+ * @top: pointer to the top element of the stack.
+ * @front: pointer to the front element of a queue.
+ * @rear: pointer to the rear element of a queue.
+ * @fstream: pointer to open FILE stream.
+ * @buffer: pointer to the current read line string.
+ * @argtokens: pointer to the argtokens string array.
+ *
+ * Description: all pointers needed to handle the stacks, queues,
+ * LIFO, and FIFO operations.
+ */
+typedef struct stack_pointers
 {
-    char *filename;
-    instruction_t* instruction; /* to be able to refer to the opcode */
-    int line_number;
-    FILE *stream;
-    char *line;
-    char **tokens;
-} args_t;
+	stack_t *top;
+	stack_t *front;
+	stack_t *rear;
+	FILE *fstream;
+	char *buffer;
+	char **argtokens;
+} stack_pointers;
 
-extern args_t *args;
+/** global variable **/
+extern stack_pointers main_stack;
 
-void initialize_args();
-void open_stream(char *filename);
-void stream_failed(char *filename);
-void freeall();
+/** function declarations **/
+FILE *start_stream(char *filename);
+void init_argtokens(char **argtokens);
+void execute_op(int linenumber);
+void tokenize_line(char *buffer, char **argtokens);
+void init_main_stack(FILE *fstream);
+void (*get_op_fun(char **))(stack_t **, unsigned int line_number);
+int string_digit(char *string);
+void freedlist(stack_t *head);
 
-/* all monty operations functions */
+/** monty OP functions **/
 
-/*
-void push(stack_t **stack, unsigned int line_number);
-void pall(stack_t **stack, unsigned int line_number);
-void pint(stack_t **stack, unsigned int line_number);
-void pop(stack_t **stack, unsigned int line_number);
-void swap(stack_t **stack, unsigned int line_number);
-void add(stack_t **stack, unsigned int line_number);
-void nop(stack_t **stack, unsigned int line_number);
-void sub(stack_t **stack, unsigned int line_number);
-void div(stack_t **stack, unsigned int line_number);
-void mul(stack_t **stack, unsigned int line_number);
-void mod(stack_t **stack, unsigned int line_number);
-*/
-
+void monty_push(stack_t **stack, unsigned int line_number);
+void monty_pall(stack_t **stack, unsigned int line_number);
+void monty_pint(stack_t **stack, unsigned int line_number);
 
 #endif
