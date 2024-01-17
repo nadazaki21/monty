@@ -19,28 +19,20 @@ int main(int argc, char **argv)
 		printf("USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	fstream = fopen(argv[1], "r");
-	if (fstream == NULL)
-	{
-		printf("Error: Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
+	fstream = start_stream(argv[1]);
 	while (getline(&buffer, &size, fstream) != -1)
 	{
-		i = 0;
-		string = buffer;
+		init_argtokens(argtokens);
 		linenumber++;
-		while (1)
+		for (i = 0, string = buffer; i < 2; string = NULL, i++)
 		{
 			token = strtok(string, " \n");
 			if (token == NULL)
 				break;
 			argtokens[i] = token;
-			printf("%p\n", argtokens[i]);
-			string = NULL;
-			i++;
 		}
 		argtokens[i] = NULL;
+		execute_op(argtokens, linenumber);
 	}
 	fclose(fstream);
 	free(buffer);
