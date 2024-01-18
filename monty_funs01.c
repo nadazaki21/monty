@@ -28,3 +28,17 @@ void monty_add(stack_t **stack, unsigned int line_number)
 	secondtop->prev = NULL;
 	main_stack.top = secondtop;
 }
+
+/**
+ * monty_nop - doesn't do anything.
+ * @stack: pointer to the top pointer of the stack.
+ * @line_number: the current line number of the push OP code.
+ *
+ * Return: void.
+ */
+void monty_nop(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
+	return;
+}
