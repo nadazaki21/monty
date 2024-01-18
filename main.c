@@ -29,6 +29,7 @@ int main(int argc, char **argv)
 		init_argtokens(argtokens);
 		linenumber++;
 		tokenize_line(buffer, argtokens);
+		main_stack.argtokens = argtokens;
 		if (argtokens[0])
 			execute_op(linenumber);
 	}

@@ -53,7 +53,6 @@ void tokenize_line(char *buffer, char **argtokens)
 			return;
 		argtokens[i] = token;
 	}
-	main_stack.argtokens = argtokens;
 }
 
 /**
