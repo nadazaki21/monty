@@ -112,3 +112,31 @@ void monty_pop(stack_t **stack, unsigned int line_number)
 		main_stack.top = cursor;
 	}
 }
+
+/**
+ * monty_swap - swaps the top 2 elements of a stack.
+ * @stack: pointer to the top pointer of the stack.
+ * @line_number: the current line number of the push OP code.
+ *
+ * Return: void.
+ */
+void monty_swap(stack_t **stack, unsigned int line_number)
+{
+	stack_t *oldtop, *newtop;
+
+	if ((*stack) == NULL || (*stack)->next == NULL)
+	{
+		dprintf(2, "L%d: can't swap, stack too short\n", line_number);
+		fclose(main_stack.fstream);
+		free(main_stack.buffer);
+		freedlist(main_stack.top);
+		exit(EXIT_FAILURE);
+	}
+	oldtop = *stack;
+	newtop = (*stack)->next;
+	oldtop->next = newtop->next;
+	oldtop->prev = newtop;
+	newtop->next = oldtop;
+	newtop->prev = NULL;
+	main_stack.top = newtop;
+}
