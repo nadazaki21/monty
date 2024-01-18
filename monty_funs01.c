@@ -94,7 +94,7 @@ void monty_div(stack_t **stack, unsigned int line_number)
 	}
 	top = *stack;
 	secondtop = (*stack)->next;
-	if (secondtop->n == 0)
+	if (top->n == 0)
 	{
 		dprintf(2, "L%d: division by zero\n", line_number);
 		fclose(main_stack.fstream);
