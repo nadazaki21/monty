@@ -57,7 +57,7 @@ void monty_sub(stack_t **stack, unsigned int line_number)
 
 	if ((*stack) == NULL || (*stack)->next == NULL)
 	{
-		dprintf(2, "L%d: can't add, stack too short\n", line_number);
+		dprintf(2, "L%d: can't sub, stack too short\n", line_number);
 		fclose(main_stack.fstream);
 		free(main_stack.buffer);
 		freedlist(main_stack.top);
