@@ -15,3 +15,4 @@
   <[-]<<<                    reset bits
 ]                            end loop
 <[.<]                        print number backwards
+++++++++++.                  print new line
