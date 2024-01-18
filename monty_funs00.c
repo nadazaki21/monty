@@ -86,3 +86,29 @@ void monty_pint(stack_t **stack, unsigned int line_number)
 	}
 	printf("%d\n", (*stack)->n);
 }
+
+/**
+ * monty_pop - removes the top element of the stack.
+ * @stack: pointer to the top pointer of the stack.
+ * @line_number: the current line number of the push OP code.
+ *
+ * Return: void.
+ */
+void monty_pop(stack_t **stack, unsigned int line_number)
+{
+	stack_t *cursor = *stack;
+
+	if (*stack == NULL)
+	{
+		dprintf(2, "L%d: can't pop an empty stack\n", line_number);
+		fclose(main_stack.fstream);
+		free(main_stack.buffer);
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		cursor = cursor->next;
+		free(*stack);
+		main_stack.top = cursor;
+	}
+}
