@@ -36,3 +36,34 @@ void monty_mod(stack_t **stack, unsigned int line_number)
 	secondtop->prev = NULL;
 	main_stack.top = secondtop;
 }
+
+/**
+ * monty_pchar - prints the char at the top of the stack.
+ * @stack: pointer to the top pointer of the stack.
+ * @line_number: the current line number of the push OP code.
+ *
+ * Return: void.
+ */
+void monty_pchar(stack_t **stack, unsigned int line_number)
+{
+	int chr;
+
+	if ((*stack) == NULL)
+	{
+		dprintf(2, "L%d: can't pchar, stack empty\n", line_number);
+		fclose(main_stack.fstream);
+		free(main_stack.buffer);
+		freedlist(main_stack.top);
+		exit(EXIT_FAILURE);
+	}
+	chr = (*stack)->n;
+	if (chr < 0 || chr > 127)
+	{
+		dprintf(2, "L%d: can't pchar, value out of range\n", line_number);
+		fclose(main_stack.fstream);
+		free(main_stack.buffer);
+		freedlist(main_stack.top);
+		exit(EXIT_FAILURE);
+	}
+	printf("%c\n", chr);
+}
