@@ -75,6 +75,7 @@ void init_main_stack(FILE *fstream);
 void (*get_op_fun(char **))(stack_t **, unsigned int line_number);
 int string_digit(char *string);
 void freedlist(stack_t *head);
+void stack_append(stack_t *new_node);
 
 /** monty OP functions **/
 
@@ -91,7 +92,7 @@ void monty_mul(stack_t **stack, unsigned int line_number);
 void monty_mod(stack_t **stack, unsigned int line_number);
 void monty_pchar(stack_t **stack, unsigned int line_number);
 void monty_pstr(stack_t **stack, unsigned int line_number);
-
+void monty_rotl(stack_t **stack, unsigned int line_number);
 
 
 #endif
