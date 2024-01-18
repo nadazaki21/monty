@@ -1,4 +1,3 @@
-push 0
-push 5
-div
+push 1
+mul
 pall
