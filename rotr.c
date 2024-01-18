@@ -23,7 +23,7 @@ void point_last_to_first(stack_t **top)
 */
 void monty_rotr(stack_t **stack, unsigned int line_number)
 {
-	stack_t *temp;
+	/*stack_t *temp;*/
 	(void) stack;
 	(void) line_number;
 
