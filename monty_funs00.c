@@ -1,5 +1,4 @@
 #include "monty.h"
-
 /**
  * monty_push - pushes a new stack_t node on top of the stack.
  * @stack: pointer to the top pointer of the stack.
@@ -11,15 +10,19 @@ void monty_push(stack_t **stack, unsigned int line_number)
 {
 	int n;
 	char **argtokens = main_stack.argtokens;
-	stack_t *new_node = malloc(sizeof(stack_t));
+	stack_t *new_node;
 
+	if (main_stack.flag == 1)
+	{
+		add_as_queue(line_number);
+		return;
+	}
+	new_node = malloc(sizeof(stack_t));
 	(void)stack;
 	if (new_node == NULL)
 	{
 		dprintf(2, "Error: malloc failed\n");
-		free(main_stack.buffer);
-		fclose(main_stack.fstream);
-		freedlist(main_stack.top);
+		free_push();
 		exit(EXIT_FAILURE);
 	}
 	if (argtokens[1] && string_digit(argtokens[1]) == 0)
@@ -27,10 +30,8 @@ void monty_push(stack_t **stack, unsigned int line_number)
 	else
 	{
 		dprintf(2, "L%d: usage: push integer\n", line_number);
-		free(main_stack.buffer);
-		fclose(main_stack.fstream);
+		free_push();
 		free(new_node);
-		freedlist(main_stack.top);
 		exit(EXIT_FAILURE);
 	}
 	new_node->n = n;

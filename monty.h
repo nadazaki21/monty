@@ -61,6 +61,7 @@ typedef struct stack_pointers
 	FILE *fstream;
 	char *buffer;
 	char **argtokens;
+    int flag;
 } stack_pointers;
 
 /** global variable **/
@@ -77,6 +78,8 @@ int string_digit(char *string);
 void freedlist(stack_t *head);
 void stack_append(stack_t **new_node);
 void point_last_to_first(stack_t **top);
+void free_push(void);
+void add_as_queue(unsigned int line_number);
 
 /** monty OP functions **/
 
@@ -95,6 +98,8 @@ void monty_pchar(stack_t **stack, unsigned int line_number);
 void monty_pstr(stack_t **stack, unsigned int line_number);
 void monty_rotl(stack_t **stack, unsigned int line_number);
 void monty_rotr(stack_t **stack, unsigned int line_number);
+void monty_stack(stack_t **stack, unsigned int line_number);
+void monty_queue(stack_t **stack, unsigned int line_number);
 
 
 #endif

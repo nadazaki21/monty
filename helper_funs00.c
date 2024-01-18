@@ -104,6 +104,8 @@ void (*get_op_fun(char **argtokens))(stack_t **stack, unsigned int line_number)
 		{"pstr", monty_pstr},
 		{"rotl", monty_rotl},
 		{"rotr", monty_rotr},
+		{"stack", monty_stack},
+		{"queue", monty_queue},
 		{NULL, NULL}
 	};
 
