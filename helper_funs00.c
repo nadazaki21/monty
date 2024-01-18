@@ -94,6 +94,7 @@ void (*get_op_fun(char **argtokens))(stack_t **stack, unsigned int line_number)
 		{"pint", monty_pint},
 		{"pop", monty_pop},
 		{"swap", monty_swap},
+		{"add", monty_add},
 		{NULL, NULL}
 	};
 

@@ -1,0 +1,30 @@
+#include "monty.h"
+
+/**
+ * monty_add - adds the top two elements of the stack.
+ * @stack: pointer to the top pointer of the stack.
+ * @line_number: the current line number of the push OP code.
+ *
+ * Return: void.
+ */
+void monty_add(stack_t **stack, unsigned int line_number)
+{
+	int sum;
+	stack_t *top, *secondtop;
+
+	if ((*stack) == NULL || (*stack)->next == NULL)
+	{
+		dprintf(2, "L%d: can't add, stack too short\n", line_number);
+		fclose(main_stack.fstream);
+		free(main_stack.buffer);
+		freedlist(main_stack.top);
+		exit(EXIT_FAILURE);
+	}
+	top = *stack;
+	secondtop = (*stack)->next;
+	sum = (top->n) + (secondtop->n);
+	secondtop->n = sum;
+	free(top);
+	secondtop->prev = NULL;
+	main_stack.top = secondtop;
+}
