@@ -40,7 +40,6 @@ void monty_nop(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
 	(void)line_number;
-	return;
 }
 
 /**
@@ -103,7 +102,7 @@ void monty_div(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	div = (secondtop->n) / (top->n);
-      	secondtop->n = div;
+	secondtop->n = div;
 	free(top);
 	secondtop->prev = NULL;
 	main_stack.top = secondtop;
