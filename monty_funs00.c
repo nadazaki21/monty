@@ -1,5 +1,12 @@
 #include "monty.h"
 
+/**
+ * monty_push - pushes a new stack_t node on top of the stack.
+ * @stack: pointer to the top pointer of the stack.
+ * @line_number: the current line number of the push OP code.
+ *
+ * Return: void.
+ */
 void monty_push(stack_t **stack, unsigned int line_number)
 {
 	int n;
@@ -12,6 +19,7 @@ void monty_push(stack_t **stack, unsigned int line_number)
 		dprintf(2, "Error: malloc failed\n");
 		free(main_stack.buffer);
 		fclose(main_stack.fstream);
+		freedlist(main_stack.top);
 		exit(EXIT_FAILURE);
 	}
 	if (argtokens[1] && string_digit(argtokens[1]) == 0)
@@ -22,6 +30,7 @@ void monty_push(stack_t **stack, unsigned int line_number)
 		free(main_stack.buffer);
 		fclose(main_stack.fstream);
 		free(new_node);
+		freedlist(main_stack.top);
 		exit(EXIT_FAILURE);
 	}
 	new_node->n = n;
@@ -39,6 +48,13 @@ void monty_push(stack_t **stack, unsigned int line_number)
 	}
 }
 
+/**
+ * monty_pall - prints all elements of a stack starting from top.
+ * @stack: pointer to the top pointer of the stack.
+ * @line_number: the current line number of the push OP code.
+ *
+ * Return: void.
+ */
 void monty_pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *cursor = main_stack.top;
@@ -52,6 +68,13 @@ void monty_pall(stack_t **stack, unsigned int line_number)
 	}
 }
 
+/**
+ * monty_pint - prints the value at the top of the stack.
+ * @stack: pointer to the top pointer of the stack.
+ * @line_number: the current line number of the push OP code.
+ *
+ * Return: void.
+ */
 void monty_pint(stack_t **stack, unsigned int line_number)
 {
 	if (*stack == NULL)

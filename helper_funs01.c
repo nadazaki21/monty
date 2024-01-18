@@ -16,6 +16,12 @@ void init_main_stack(FILE *fstream)
 	main_stack.argtokens = NULL;
 }
 
+/**
+ * string_digit - checks if all characters in a string represent digits.
+ * @string: string to be checked.
+ *
+ * Return: -1 if not a digit, 0 if a digit.
+ */
 int string_digit(char *string)
 {
 	int i = 0;
@@ -30,6 +36,13 @@ int string_digit(char *string)
 	return (0);
 }
 
+
+/**
+ * freedlist - frees a doubly linked list from the head.
+ * @head: pointer to the head/top of the doubly linked list.
+ *
+ * Return: void.
+ */
 void freedlist(stack_t *head)
 {
 	stack_t *cursor = head;
