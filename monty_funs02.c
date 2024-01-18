@@ -67,3 +67,32 @@ void monty_pchar(stack_t **stack, unsigned int line_number)
 	}
 	printf("%c\n", chr);
 }
+
+/**
+ * monty_pstr - prints the string starting at the top of the stack.
+ * @stack: pointer to the top pointer of the stack.
+ * @line_number: the current line number of the push OP code.
+ *
+ * Return: void.
+ */
+void monty_pstr(stack_t **stack, unsigned int line_number)
+{
+	int chr;
+	stack_t *cursor = *stack;
+
+	(void)line_number;
+	if ((*stack) == NULL)
+	{
+		printf("\n");
+		return;
+	}
+	while (cursor != NULL)
+	{
+		chr = cursor->n;
+		if (chr < 0 || chr > 127 || chr == 0)
+			break;
+		printf("%c", chr);
+		cursor = cursor->next;
+	}
+	printf("\n");
+}
