@@ -99,6 +99,7 @@ void (*get_op_fun(char **argtokens))(stack_t **stack, unsigned int line_number)
 		{"sub", monty_sub},
 		{"div", monty_div},
 		{"mul", monty_mul},
+		{"mod", monty_mod},
 		{NULL, NULL}
 	};
 
