@@ -30,7 +30,8 @@ void monty_rotr(stack_t **stack, unsigned int line_number)
 	if (main_stack.top == NULL ||
 	 ((main_stack.top != NULL) && (main_stack.top->next == NULL)))
 		return;
-	/* if they are 2 node only in the stack */
+	
+	/* if they are 2 node only in the stack 
 	if ((main_stack.top != NULL) &&
 	 (main_stack.top->next != NULL) && (main_stack.top->next->next == NULL))
 	{
@@ -45,5 +46,6 @@ void monty_rotr(stack_t **stack, unsigned int line_number)
 		temp->next = NULL;
 		return;
 	}
+	*/
 	point_last_to_first(&main_stack.top);
 }
