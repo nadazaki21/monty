@@ -11,13 +11,13 @@ void stack_append(stack_t **new_node) /* changes what point to the first */
 	while (last_node->next != NULL)
 		last_node = last_node->next;
 
-    second_node = (*new_node)->next;
+	second_node = (*new_node)->next;
 	last_node->next = *new_node;
-    (*new_node)->next = NULL;
-    (*new_node)->prev = last_node;
-    second_node->prev = NULL;
- 
-    main_stack.top = second_node;
+	(*new_node)->next = NULL;
+	(*new_node)->prev = last_node;
+	second_node->prev = NULL;
+
+	main_stack.top = second_node;
 
 }
 /**
@@ -34,8 +34,5 @@ void monty_rotl(stack_t **stack, unsigned int line_number)
 	 ((main_stack.top != NULL) && (main_stack.top->next == NULL)))
 		return;
 
-	
 	stack_append(&main_stack.top);
-	
 }
-
