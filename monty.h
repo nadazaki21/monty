@@ -75,7 +75,7 @@ void init_main_stack(FILE *fstream);
 void (*get_op_fun(char **))(stack_t **, unsigned int line_number);
 int string_digit(char *string);
 void freedlist(stack_t *head);
-void stack_append(stack_t *new_node);
+void stack_append(stack_t **new_node);
 void point_last_to_first(stack_t **top);
 
 /** monty OP functions **/
