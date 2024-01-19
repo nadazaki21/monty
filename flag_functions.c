@@ -4,6 +4,7 @@
  * @stack: pointer to a slack
  * @line_number: the line number
 */
+
 void monty_stack(stack_t **stack, unsigned int line_number)
 {
 	(void) stack;
