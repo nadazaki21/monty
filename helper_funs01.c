@@ -57,7 +57,6 @@ void free_push(void)
 	fclose(main_stack.fstream);
 	freedlist(main_stack.top);
 }
-
 /**
  * add_as_queue - adds new nodes to the end of queue
  * @line_number: the line number
