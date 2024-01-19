@@ -48,3 +48,4 @@ void monty_rotr(stack_t **stack, unsigned int line_number)
 	}
 	point_last_to_first(&main_stack.top);
 }
+
