@@ -1,11 +1,11 @@
 #include "monty.h"
-
 /**
  * init_main_stack - initializes the main_stack pointers to null.
  * @fstream: pointer to the file stream.
  *
  * Return: void.
  */
+
 void init_main_stack(FILE *fstream)
 {
 	main_stack.top = NULL;
