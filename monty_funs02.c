@@ -7,6 +7,7 @@
  *
  * Return: void.
  */
+
 void monty_mod(stack_t **stack, unsigned int line_number)
 {
 	int mod;
